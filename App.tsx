@@ -4,7 +4,7 @@ import { Instagram, Youtube, Mail } from "lucide-react";
 function Attribution() {
   return (
     <div className="w-full flex justify-center mt-2 mb-4">
-      <p className="text-[10px] text-white">loremipsum</p>
+      <p className="text-[10px] text-white">© 2025 pedlar. All Rights Reserved.</p>
     </div>
   );
 }
