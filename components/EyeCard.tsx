@@ -461,6 +461,39 @@ export function EyeCard() {
     }
   }, [activeCard]);
 
+  // Track card views and time spent
+  useEffect(() => {
+    const cardStartTime = Date.now();
+    const cardName = activeCard.charAt(0).toUpperCase() + activeCard.slice(1);
+
+    // Track page view for the card
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'page_view', {
+        page_title: cardName,
+        page_location: window.location.href,
+        page_path: `/${activeCard}`
+      });
+
+      // Track card view event
+      window.gtag('event', 'card_view', {
+        card_name: cardName,
+        card_type: activeCard
+      });
+    }
+
+    // Track time spent when leaving the card
+    return () => {
+      const timeSpent = Math.round((Date.now() - cardStartTime) / 1000); // in seconds
+      if (typeof window !== 'undefined' && window.gtag && timeSpent > 0) {
+        window.gtag('event', 'card_time_spent', {
+          card_name: cardName,
+          card_type: activeCard,
+          time_spent_seconds: timeSpent
+        });
+      }
+    };
+  }, [activeCard]);
+
   const minSwipeDistance = 50;
 
   const onTouchStart = (e: React.TouchEvent | React.MouseEvent) => {
