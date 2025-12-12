@@ -54,7 +54,7 @@ function Monster() {
           onTouchStart={(e) => e.stopPropagation()}
           onTouchMove={(e) => e.stopPropagation()}
         >
-          <div className="text-black whitespace-pre-line text-sm leading-relaxed">
+          <div className="text-black whitespace-pre-line text-base sm:text-lg leading-relaxed">
             {lyrics || "Loading lyrics..."}
           </div>
         </div>
